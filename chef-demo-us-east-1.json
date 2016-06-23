@@ -439,73 +439,14 @@
         ]
       }
     },
-    "WinWorkSecurityGroup": {
-      "Type": "AWS::EC2::SecurityGroup",
-      "Properties": {
-        "VpcId": {
-          "Ref": "VPC"
-        },
-        "GroupDescription": "Enable required ports for Delivery Cluster",
-        "SecurityGroupIngress": [
-          {
-            "IpProtocol": "tcp",
-            "FromPort": "3389",
-            "ToPort": "3389",
-            "CidrIp": {
-              "Ref": "SSHLocation"
-            }
-          },
-          {
-            "IpProtocol": "udp",
-            "FromPort": "3389",
-            "ToPort": "3389",
-            "CidrIp": {
-              "Ref": "SSHLocation"
-            }
-          }
-        ]
-      }
-    },
-    "WinWorkstation": {
-      "Type": "AWS::EC2::Instance",
-      "Properties": {
-        "InstanceType": "t2.large",
-        "Tags": [
-          {
-            "Key": "Name",
-            "Value": "delivery-tutorial-workstation"
-          }
-        ],
-        "NetworkInterfaces": [
-          {
-            "GroupSet": [
-              {
-                "Ref": "WinWorkSecurityGroup"
-              }
-            ],
-            "AssociatePublicIpAddress": "true",
-            "PrivateIpAddress": "10.0.0.5",
-            "DeviceIndex": "0",
-            "DeleteOnTermination": "true",
-            "SubnetId": {
-              "Ref": "Subnet"
-            }
-          }
-        ],
-        "KeyName": {
-          "Ref": "KeyName"
-        },
-        "ImageId": "ami-02ce2e6f"
-      }
-    },
     "ChefServer": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
-        "InstanceType": "m4.large",
+        "InstanceType": "c3.xlarge",
         "Tags": [
           {
             "Key": "Name",
-            "Value": "delivery-tutorial-chef-server"
+            "Value": "chefserver01"
           }
         ],
         "NetworkInterfaces": [
@@ -527,17 +468,17 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-62ce2e0f"
+        "ImageId": "ami-fce3c696"
       }
     },
     "DeliveryServer": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
-        "InstanceType": "m4.large",
+        "InstanceType": "c3.xlarge",
         "Tags": [
           {
             "Key": "Name",
-            "Value": "delivery-tutorial-delivery-server"
+            "Value": "deliveryserver01"
           }
         ],
         "NetworkInterfaces": [
@@ -559,17 +500,177 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-87c929ea"
+        "ImageId": "ami-fce3c696"
+      }
+    },
+    "DeliverySupermarket": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "c3.xlarge",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "chefsupermarket01"
+          }
+        ],
+        "NetworkInterfaces": [
+          {
+            "GroupSet": [
+              {
+                "Ref": "DeliverySecGroup"
+              }
+            ],
+            "AssociatePublicIpAddress": "true",
+            "PrivateIpAddress": "10.0.0.19",
+            "DeviceIndex": "0",
+            "DeleteOnTermination": "true",
+            "SubnetId": {
+              "Ref": "Subnet"
+            }
+          }
+        ],
+        "KeyName": {
+          "Ref": "KeyName"
+        },
+        "ImageId": "ami-fce3c696"
+      }
+    },
+    "ChefCompliance": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "c3.large",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "chefcompliance01"
+          }
+        ],
+        "NetworkInterfaces": [
+          {
+            "GroupSet": [
+              {
+                "Ref": "DeliverySecGroup"
+              }
+            ],
+            "AssociatePublicIpAddress": "true",
+            "PrivateIpAddress": "10.0.0.20",
+            "DeviceIndex": "0",
+            "DeleteOnTermination": "true",
+            "SubnetId": {
+              "Ref": "Subnet"
+            }
+          }
+        ],
+        "KeyName": {
+          "Ref": "KeyName"
+        },
+        "ImageId": "ami-2051294a"
+      }
+    },
+    "ChefAnalytics": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "c3.2xlarge",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "chefanalytics01"
+          }
+        ],
+        "NetworkInterfaces": [
+          {
+            "GroupSet": [
+              {
+                "Ref": "DeliverySecGroup"
+              }
+            ],
+            "AssociatePublicIpAddress": "true",
+            "PrivateIpAddress": "10.0.0.21",
+            "DeviceIndex": "0",
+            "DeleteOnTermination": "true",
+            "SubnetId": {
+              "Ref": "Subnet"
+            }
+          }
+        ],
+        "KeyName": {
+          "Ref": "KeyName"
+        },
+        "ImageId": "ami-2051294a"
+      }
+    },
+    "Jenkins": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "c3.large",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "jenkins01"
+          }
+        ],
+        "NetworkInterfaces": [
+          {
+            "GroupSet": [
+              {
+                "Ref": "DeliverySecGroup"
+              }
+            ],
+            "AssociatePublicIpAddress": "true",
+            "PrivateIpAddress": "10.0.0.22",
+            "DeviceIndex": "0",
+            "DeleteOnTermination": "true",
+            "SubnetId": {
+              "Ref": "Subnet"
+            }
+          }
+        ],
+        "KeyName": {
+          "Ref": "KeyName"
+        },
+        "ImageId": "ami-2051294a"
+      }
+    },
+    "Splunk": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "m4.large",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "splunk01"
+          }
+        ],
+        "NetworkInterfaces": [
+          {
+            "GroupSet": [
+              {
+                "Ref": "DeliverySecGroup"
+              }
+            ],
+            "AssociatePublicIpAddress": "true",
+            "PrivateIpAddress": "10.0.0.23",
+            "DeviceIndex": "0",
+            "DeleteOnTermination": "true",
+            "SubnetId": {
+              "Ref": "Subnet"
+            }
+          }
+        ],
+        "KeyName": {
+          "Ref": "KeyName"
+        },
+        "ImageId": "ami-2051294a"
       }
     },
     "Build01": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
-        "InstanceType": "t2.medium",
+        "InstanceType": "c3.large",
         "Tags": [
           {
             "Key": "Name",
-            "Value": "delivery-tutorial-build-node-1"
+            "Value": "buildnode01"
           }
         ],
         "NetworkInterfaces": [
@@ -591,17 +692,17 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-63ce2e0e"
+        "ImageId": "ami-fce3c696"
       }
     },
     "Build02": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
-        "InstanceType": "t2.medium",
+        "InstanceType": "c3.large",
         "Tags": [
           {
             "Key": "Name",
-            "Value": "delivery-tutorial-build-node-2"
+            "Value": "buildnode02"
           }
         ],
         "NetworkInterfaces": [
@@ -623,17 +724,81 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-d6ca2abb"
+        "ImageId": "ami-fce3c696"
+      }
+    },
+    "Build03": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "c3.large",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "buildnode03"
+          }
+        ],
+        "NetworkInterfaces": [
+          {
+            "GroupSet": [
+              {
+                "Ref": "DeliverySecGroup"
+              }
+            ],
+            "AssociatePublicIpAddress": "true",
+            "PrivateIpAddress": "10.0.0.18",
+            "DeviceIndex": "0",
+            "DeleteOnTermination": "true",
+            "SubnetId": {
+              "Ref": "Subnet"
+            }
+          }
+        ],
+        "KeyName": {
+          "Ref": "KeyName"
+        },
+        "ImageId": "ami-fce3c696"
+      }
+    },
+    "WorkStation": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "m4.large",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "workstation01"
+          }
+        ],
+        "NetworkInterfaces": [
+          {
+            "GroupSet": [
+              {
+                "Ref": "DeliverySecGroup"
+              }
+            ],
+            "AssociatePublicIpAddress": "true",
+            "PrivateIpAddress": "10.0.0.24",
+            "DeviceIndex": "0",
+            "DeleteOnTermination": "true",
+            "SubnetId": {
+              "Ref": "Subnet"
+            }
+          }
+        ],
+        "KeyName": {
+          "Ref": "KeyName"
+        },
+        "ImageId": "ami-fce3c696"
       }
     },
     "Acceptance": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
-        "InstanceType": "t2.medium",
+        "InstanceType": "m3.medium",
         "Tags": [
           {
             "Key": "Name",
-            "Value": "delivery-tutorial-acceptance"
+            "Value": "acceptance01"
           }
         ],
         "NetworkInterfaces": [
@@ -655,20 +820,75 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-d7ca2aba"
+        "ImageId": "ami-fce3c696"
+      }
+    },
+    "Rehearsal": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "m3.medium",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "rehearsal01"
+          }
+        ],
+        "NetworkInterfaces": [
+          {
+            "GroupSet": [
+              {
+                "Ref": "DeliverySecGroup"
+              }
+            ],
+            "AssociatePublicIpAddress": "true",
+            "PrivateIpAddress": "10.0.0.16",
+            "DeviceIndex": "0",
+            "DeleteOnTermination": "true",
+            "SubnetId": {
+              "Ref": "Subnet"
+            }
+          }
+        ],
+        "KeyName": {
+          "Ref": "KeyName"
+        },
+        "ImageId": "ami-fce3c696"
+      }
+    },
+    "Delivered": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "m3.medium",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "delivered01"
+          }
+        ],
+        "NetworkInterfaces": [
+          {
+            "GroupSet": [
+              {
+                "Ref": "DeliverySecGroup"
+              }
+            ],
+            "AssociatePublicIpAddress": "true",
+            "PrivateIpAddress": "10.0.0.17",
+            "DeviceIndex": "0",
+            "DeleteOnTermination": "true",
+            "SubnetId": {
+              "Ref": "Subnet"
+            }
+          }
+        ],
+        "KeyName": {
+          "Ref": "KeyName"
+        },
+        "ImageId": "ami-fce3c696"
       }
     }
   },
   "Outputs": {
-    "WindowsWorkstationPubIP": {
-      "Description": "Public IP address of the Windows workstation",
-      "Value": {
-        "Fn::GetAtt": [
-          "WinWorkstation",
-          "PublicIp"
-        ]
-      }
-    },
     "ChefServerPubIP": {
       "Description": "Public IP address of the Chef server",
       "Value": {
@@ -701,6 +921,15 @@
       "Value": {
         "Fn::GetAtt": [
           "Build02",
+          "PublicIp"
+        ]
+      }
+    },
+    "Build03PubIP": {
+      "Description": "Public IP address of build node 3",
+      "Value": {
+        "Fn::GetAtt": [
+          "Build03",
           "PublicIp"
         ]
       }
