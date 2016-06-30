@@ -934,6 +934,15 @@
         ]
       }
     },
+    "WorkStation01PubIP": {
+      "Description": "Public IP address of workstation",
+      "Value": {
+        "Fn::GetAtt": [
+          "WorkStation",
+          "PublicIp"
+        ]
+      }
+    },
     "AcceptancePubIP": {
       "Description": "Public IP address of the Acceptance environment",
       "Value": {
