@@ -468,7 +468,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-f524e998"
+        "ImageId": "ami-42c87355"
       }
     },
     "DeliveryServer": {
@@ -500,7 +500,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-ad25e8c0"
+        "ImageId": "ami-92d46f85"
       }
     },
     "DeliverySupermarket": {
@@ -532,7 +532,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-b42ae7d9"
+        "ImageId": "ami-51c97246"
       }
     },
     "ChefCompliance": {
@@ -564,13 +564,13 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-2051294a"
+        "ImageId": "ami-c5c873d2"
       }
     },
     "ChefAnalytics": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
-        "InstanceType": "c3.2xlarge",
+        "InstanceType": "c3.xlarge",
         "Tags": [
           {
             "Key": "Name",
@@ -596,7 +596,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-2051294a"
+        "ImageId": "ami-51cf7446"
       }
     },
     "Jenkins": {
@@ -628,7 +628,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-2051294a"
+        "ImageId": "ami-b1cb70a6"
       }
     },
     "Splunk": {
@@ -660,7 +660,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-2051294a"
+        "ImageId": "ami-30cb7027"
       }
     },
     "Build01": {
@@ -692,7 +692,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-dd25e8b0"
+        "ImageId": "ami-4ccf745b"
       }
     },
     "Build02": {
@@ -724,7 +724,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-f024e99d"
+        "ImageId": "ami-2cca713b"
       }
     },
     "Build03": {
@@ -756,13 +756,13 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-dc25e8b1"
+        "ImageId": "ami-21ca7136"
       }
     },
     "WorkStation": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
-        "InstanceType": "m4.large",
+        "InstanceType": "t2.small",
         "Tags": [
           {
             "Key": "Name",
@@ -788,7 +788,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-4b24e926"
+        "ImageId": "ami-d5c873c2"
       }
     },
     "Acceptance": {
@@ -820,7 +820,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-fce3c696"
+        "ImageId": "ami-d3c873c4"
       }
     },
     "Rehearsal": {
@@ -852,7 +852,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-fce3c696"
+        "ImageId": "ami-8eca7199"
       }
     },
     "Delivered": {
@@ -884,7 +884,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-fce3c696"
+        "ImageId": "ami-25ca7132"
       }
     }
   },
@@ -930,6 +930,15 @@
       "Value": {
         "Fn::GetAtt": [
           "Build03",
+          "PublicIp"
+        ]
+      }
+    },
+    "WorkStation01PubIP": {
+      "Description": "Public IP address of workstation",
+      "Value": {
+        "Fn::GetAtt": [
+          "WorkStation",
           "PublicIp"
         ]
       }
