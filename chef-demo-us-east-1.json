@@ -570,7 +570,7 @@
     "ChefAnalytics": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
-        "InstanceType": "c3.2xlarge",
+        "InstanceType": "c3.xlarge",
         "Tags": [
           {
             "Key": "Name",
@@ -762,7 +762,7 @@
     "WorkStation": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
-        "InstanceType": "m4.large",
+        "InstanceType": "t2.small",
         "Tags": [
           {
             "Key": "Name",
