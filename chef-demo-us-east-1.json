@@ -823,6 +823,38 @@
         "ImageId": "ami-d3c873c4"
       }
     },
+    "Union": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "m3.medium",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "union01"
+          }
+        ],
+        "NetworkInterfaces": [
+          {
+            "GroupSet": [
+              {
+                "Ref": "DeliverySecGroup"
+              }
+            ],
+            "AssociatePublicIpAddress": "true",
+            "PrivateIpAddress": "10.0.0.25",
+            "DeviceIndex": "0",
+            "DeleteOnTermination": "true",
+            "SubnetId": {
+              "Ref": "Subnet"
+            }
+          }
+        ],
+        "KeyName": {
+          "Ref": "KeyName"
+        },
+        "ImageId": "ami-fce3c696"
+      }
+    },
     "Rehearsal": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
