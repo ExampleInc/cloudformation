@@ -311,6 +311,22 @@
           },
           {
             "IpProtocol": "tcp",
+            "FromPort": "8080",
+            "ToPort": "8080",
+            "CidrIp": {
+              "Ref": "SSHLocation"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "8000",
+            "ToPort": "8000",
+            "CidrIp": {
+              "Ref": "SSHLocation"
+            }
+          },
+          {
+            "IpProtocol": "tcp",
             "FromPort": "80",
             "ToPort": "80",
             "CidrIp": "10.0.0.0/8"
@@ -449,6 +465,12 @@
           },
           {
             "IpProtocol": "tcp",
+            "FromPort": "9997",
+            "ToPort": "9997",
+            "CidrIp": "10.0.0.0/8"
+          },
+          {
+            "IpProtocol": "tcp",
             "FromPort": "1337",
             "ToPort": "1337",
             "CidrIp": "10.0.0.0/8"
@@ -485,7 +507,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-42c87355"
+        "ImageId": "ami-a5ac2bb2"
       }
     },
     "DeliveryServer": {
@@ -517,7 +539,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-92d46f85"
+        "ImageId": "ami-16ac2b01"
       }
     },
     "DeliverySupermarket": {
@@ -549,7 +571,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-51c97246"
+        "ImageId": "ami-4fab2c58"
       }
     },
     "ChefCompliance": {
@@ -581,7 +603,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-c5c873d2"
+        "ImageId": "ami-49ab2c5e"
       }
     },
     "ChefAnalytics": {
@@ -613,7 +635,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-51cf7446"
+        "ImageId": "ami-4bab2c5c"
       }
     },
     "Jenkins": {
@@ -645,7 +667,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-b1cb70a6"
+        "ImageId": "ami-23ad2a34"
       }
     },
     "Splunk": {
@@ -677,7 +699,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-30cb7027"
+        "ImageId": "ami-41aa2d56"
       }
     },
     "Build01": {
@@ -709,7 +731,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-4ccf745b"
+        "ImageId": "ami-31ab2c26"
       }
     },
     "Build02": {
@@ -741,7 +763,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-2cca713b"
+        "ImageId": "ami-2dad2a3a"
       }
     },
     "Build03": {
@@ -773,7 +795,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-21ca7136"
+        "ImageId": "ami-2caa2d3b"
       }
     },
     "WorkStation": {
@@ -805,7 +827,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-d5c873c2"
+        "ImageId": "ami-1aac2b0d"
       }
     },
     "Acceptance": {
@@ -837,7 +859,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-d3c873c4"
+        "ImageId": "ami-32ab2c25"
       }
     },
     "Union": {
@@ -869,7 +891,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-fce3c696"
+        "ImageId": "ami-e6aa2df1"
       }
     },
     "Rehearsal": {
@@ -901,7 +923,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-8eca7199"
+        "ImageId": "ami-3cab2c2b"
       }
     },
     "Delivered": {
@@ -933,7 +955,7 @@
         "KeyName": {
           "Ref": "KeyName"
         },
-        "ImageId": "ami-25ca7132"
+        "ImageId": "ami-cbab2cdc"
       }
     }
   },
